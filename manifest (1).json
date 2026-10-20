@@ -1,0 +1,11 @@
+{
+  "background_color": "#d71a1a",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Streamix",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Streamix",
+  "start_url": "/",
+  "theme_color": "#0e52cc"
+}
