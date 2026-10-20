@@ -1,0 +1,39 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Cordova & Dependencies
+        run: |
+          npm install -g cordova
+          npm install
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Build Android APK
+        run: |
+          cordova build android --release || cordova build android
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: Streamix-TV-APK
+          path: platforms/android/app/build/outputs/apk/
